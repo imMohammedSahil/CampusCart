@@ -1,19 +1,24 @@
-<div align="center">
-
 # CampusCart
-### Distributed Campus Commerce & Automated Document Print Orchestration Engine
+> **Distributed Campus Commerce & Automated Document Print Orchestration Engine**
+> 
+> *A decoupled full-stack platform engineered to digitize university resource centers, offload client-side PDF binary stream parsing to background Web Workers, and manage multi-tenant order fulfillment queues.*
 
-[![Node.js Version](https://img.shields.io/badge/node-%3E%3D20.0.0-339933?style=flat-square&logo=node.js)](https://nodejs.org)
-[![Express Framework](https://img.shields.io/badge/express-5.2.1-000000?style=flat-square&logo=express)](https://expressjs.com)
-[![React Framework](https://img.shields.io/badge/react-19.2.5-61DAFB?style=flat-square&logo=react)](https://react.dev)
-[![React Router](https://img.shields.io/badge/react--router--dom-7.14.2-CA4245?style=flat-square&logo=react-router)](https://reactrouter.com)
-[![MongoDB](https://img.shields.io/badge/mongodb-mongoose_9.6.0-47A248?style=flat-square&logo=mongodb)](https://mongoosejs.com)
-[![PDF Processing](https://img.shields.io/badge/pdfjs--dist-5.7.284-FF0000?style=flat-square)](https://mozilla.github.io/pdf.js/)
-[![License](https://img.shields.io/badge/license-ISC-blue?style=flat-square)](LICENSE)
+```
+Repository : CampusCart Core Engine
+Architecture : Decoupled Client-Server (RESTful API / MongoDB Document Store)
+Live Demo    : https://testing-eta-teal-85.vercel.app/
+License      : ISC Open Source License
+```
 
-[System Architecture](#system-architecture) • [Data Pipeline](#data-pipeline--state-machine) • [Tech Stack](#technology-stack-specification) • [API Contract](#rest-api-specification) • [Data Schemas](#database-schema--data-models) • [Local Setup](#local-environment-setup) • [Live Demo](https://testing-eta-teal-85.vercel.app/)
+| Subsystem Spec | Target Runtime & Framework | Protocol / Driver | Operational Role |
+| :--- | :--- | :--- | :--- |
+| **Client Core** | React `v19.2.5` / React Router `v7.14.2` | HTML5 / ESNext | Concurrent UI, Context state, route-level authorization |
+| **Document Engine** | PDF.js Worker `v5.7.284` | Web Worker Thread | In-browser binary parsing, page extraction, pricing math |
+| **API Gateway** | Express.js `v5.2.1` on Node.js `v20+` | RESTful HTTP / JSON | Request orchestration, multipart ingestion (`Multer`), CORS |
+| **Data Persistence** | MongoDB / Mongoose `v9.6.0` | MongoDB Native Wire | B-Tree indexed order queue, user directory, product catalog |
+| **Security Layer** | Bcrypt `v5.1.1` | Blowfish Cipher (10 Rounds) | Credential hashing, role validation (`student` / `admin`) |
 
-</div>
+**Navigation**: [System Architecture](#system-architecture) • [Data Pipeline & State Machine](#data-pipeline--state-machine) • [Tech Stack Specs](#technology-stack-specification) • [API Contracts](#rest-api-specification) • [Database Schemas](#database-schema--data-models) • [Local Setup](#local-environment-setup)
 
 ---
 
