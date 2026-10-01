@@ -3,13 +3,6 @@
 > 
 > *A decoupled full-stack platform engineered to digitize university resource centers, offload client-side PDF binary stream parsing to background Web Workers, and manage multi-tenant order fulfillment queues.*
 
-```
-Repository : CampusCart Core Engine
-Architecture : Decoupled Client-Server (RESTful API / MongoDB Document Store)
-Live Demo    : https://testing-eta-teal-85.vercel.app/
-License      : ISC Open Source License
-```
-
 | Subsystem Spec | Target Runtime & Framework | Protocol / Driver | Operational Role |
 | :--- | :--- | :--- | :--- |
 | **Client Core** | React `v19.2.5` / React Router `v7.14.2` | HTML5 / ESNext | Concurrent UI, Context state, route-level authorization |
@@ -18,7 +11,7 @@ License      : ISC Open Source License
 | **Data Persistence** | MongoDB / Mongoose `v9.6.0` | MongoDB Native Wire | B-Tree indexed order queue, user directory, product catalog |
 | **Security Layer** | Bcrypt `v5.1.1` | Blowfish Cipher (10 Rounds) | Credential hashing, role validation (`student` / `admin`) |
 
-**Navigation**: [System Architecture](#system-architecture) • [Data Pipeline & State Machine](#data-pipeline--state-machine) • [Tech Stack Specs](#technology-stack-specification) • [API Contracts](#rest-api-specification) • [Database Schemas](#database-schema--data-models) • [Local Setup](#local-environment-setup)
+**Quick Links**: [Live Demo](https://testing-eta-teal-85.vercel.app/) • [System Architecture](#system-architecture) • [Data Pipeline & State Machine](#data-pipeline--state-machine) • [Tech Stack Specs](#technology-stack-specification) • [API Contracts](#rest-api-specification) • [Database Schemas](#database-schema--data-models) • [Local Setup](#local-environment-setup)
 
 ---
 
