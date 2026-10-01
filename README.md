@@ -155,10 +155,14 @@ stateDiagram-v2
 
 ### 1. Client-Side Document Analysis Pipeline
 * **Zero-Server Ingestion**: Instead of transmitting raw documents to the backend for pre-flight analysis, CampusCart uses an in-browser Web Worker running `pdfjs-dist/legacy/build/pdf.worker.min.js`.
-* **Execution**: An `ArrayBuffer` slice is evaluated without blocking main-thread UI operations.
-* **Pricing Engine**:
-$$\text{Document Total} = \text{Pages} \times \text{Rate}_{\text{ColorMode}} \times \text{Copies}$$
-  * Rate Matrix: $\text{B\&W} = ₹2/\text{page}$, $\text{Color} = ₹10/\text{page}$.
+* **Execution**: An `ArrayBuffer` slice is evaluated asynchronously without blocking main-thread UI operations.
+* **Pricing Formula**:
+  ```text
+  Document Total = Pages × Base Rate × Copies
+  ```
+* **Base Rate Matrix**:
+  * Black & White: `₹2 / page`
+  * Color: `₹10 / page`
 
 ### 2. Heterogeneous Cart Orchestration
 * Reconciles two distinct order schemas into a single atomic payload:
@@ -167,7 +171,7 @@ $$\text{Document Total} = \text{Pages} \times \text{Rate}_{\text{ColorMode}} \ti
 * Implements type-safe quantity arithmetic preventing string-coercion bugs (`Number(qty)` validation guards).
 
 ### 3. Acknowledged Polling Notification Protocol
-* The student dashboard polls `GET /api/orders/notifications` at a controlled $3000\,\text{ms}$ interval.
+* The student dashboard polls `GET /api/orders/notifications` at a controlled 3000ms interval.
 * Upon detecting an order with `status: "ready"` and `isNotified: false`, a browser toast and audio cue are dispatched.
 * The client sends an immediate acknowledgment mutation: `PATCH /api/orders/:id/notify`, resetting `isNotified = true` on the database to prevent duplicate notifications.
 
@@ -386,19 +390,6 @@ npm install
 npm start
 # Client will compile and spawn on http://localhost:3000
 ```
-
----
-
-## Engineering Roadmap & Hardening
-
-- [x] **Client-Side PDF Ingestion Worker**: Multi-threaded page count and dynamic cost extraction.
-- [x] **Heterogeneous Cart Synchronizer**: Atomic multi-item checkout combining SKUs and dynamic prints.
-- [x] **Acknowledged Polling Notification Pipeline**: Non-intrusive duplicate-safe toast updates for students.
-- [x] **Role-Based Protected Routing**: Distinct access surfaces for student and administrative operators.
-- [ ] **WebSocket / Server-Sent Events (SSE) Migration**: Replace HTTP polling with persistent bi-directional event stream for order queues.
-- [ ] **Payment Gateway Webhook Verification**: Razorpay/Stripe automated signature verification and transaction reconciliation.
-- [ ] **Containerization & CI/CD**: Multi-stage Dockerfile definitions and automated GitHub Actions test pipeline.
-- [ ] **Redis Caching Layer**: In-memory caching for high-read stationery product catalog queries.
 
 ---
 
