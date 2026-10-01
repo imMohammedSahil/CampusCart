@@ -183,6 +183,25 @@ const LoginPage = () => {
           {isNewUser ? "Already have an account? Log in" : "New user? Sign up"}
         </button>
 
+        {/* 🛠️ DEV BYPASS */}
+        <button
+          type="button"
+          onClick={() => {
+            sessionStorage.setItem("role", "student");
+            sessionStorage.setItem("user", "dev_user@example.com");
+            navigate("/intro");
+          }}
+          style={{
+            ...styles.toggleBtn,
+            marginTop: "12px",
+            borderColor: "rgba(255,255,255,0.1)",
+            color: "#4b5a72",
+            fontSize: "11px",
+          }}
+        >
+          Skip to Dashboard (Dev Bypass)
+        </button>
+
         <div style={styles.divider} />
         <p style={styles.footer}>
           Need help? <span style={styles.footerLink}>Contact support</span>
